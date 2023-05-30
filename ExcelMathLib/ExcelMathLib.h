@@ -1,8 +1,9 @@
 // MathLibrary.h - Contains declarations of math functions
 #pragma once
 
-#ifdef MATHLIBRARY_EXPORTS
-#define MATHLIBRARY_API __declspec(dllexport)
+#ifdef EXCELMATHLIB_EXPORTS
+#define EXCELMATHLIB_API __declspec(dllexport)
 #else
-#define MATHLIBRARY_API __declspec(dllimport)
+#define EXCELMATHLIB_API __declspec(dllimport)
 #endif
+
