@@ -2,9 +2,7 @@
 #include "pch.h" // use stdafx.h in Visual Studio 2017 and earlier
 #include <utility>
 #include <limits.h>
-#include <string>
 #include "ExcelMathLib.h"
-using namespace std;
 double WINAPI get_square(double* x) //returns square of a given number
 {
     return *x * *x;
@@ -30,11 +28,4 @@ double WINAPI add_two(double* x) //adds 2.0 to the given input x
 double WINAPI power(double* x, double* y) // raises x to the power of y.
 {
     return pow(*x, *y);
-}
-
-string WINAPI word(int* x) //returns a string "x" repeated x times.
-{
-    string result = "";
-    result.insert(0, 5, 'x');
-    return result;
 }
