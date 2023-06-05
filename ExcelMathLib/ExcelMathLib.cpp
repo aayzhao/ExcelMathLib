@@ -46,12 +46,7 @@ double WINAPI power(double* x, double* y) // raises x to the power of y.
 }
 */
 
-BSTR WINAPI wordFunc() // returns a VBA string of "test"
-{
-    return ConvertMBSToBSTR("test");
-}
-
-BSTR ConvertMBSToBSTR(const std::string& str)
+BSTR ConvertMBSToBSTR(const std::string& str) //found online for converting wstrings to BSTRs
 {
     int wslen = ::MultiByteToWideChar(CP_ACP, 0 /* no flags */,
         str.data(), str.length(),
@@ -62,4 +57,9 @@ BSTR ConvertMBSToBSTR(const std::string& str)
         str.data(), str.length(),
         wsdata, wslen);
     return wsdata;
+}
+
+BSTR WINAPI wordFunc() // returns a VBA string of "test"
+{
+    return ConvertMBSToBSTR("test");
 }
