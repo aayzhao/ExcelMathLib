@@ -40,9 +40,15 @@ double WINAPI power(double* x, double* y) // raises x to the power of y.
     return pow(*x, *y);
 }
 
-BSTR WINAPI wordFunc() //returns a VBA string of "I am a happy BSTR"
+/*BSTR WINAPI wordFunc() //returns a VBA string of "I am a happy BSTR"
 {
-    return SysAllocString(L"I am a happy BSTR");
+    return SysAllocString(L"test");
+}
+*/
+
+BSTR WINAPI wordFunc() // returns a VBA string of "test"
+{
+    return ConvertMBSToBSTR("test");
 }
 
 BSTR ConvertMBSToBSTR(const std::string& str)
