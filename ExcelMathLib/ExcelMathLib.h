@@ -12,3 +12,4 @@ extern "C" EXCELMATHLIB_API double add_nums(double* x, double* y);
 extern "C" EXCELMATHLIB_API double divide_nums(double* x, double* y);
 extern "C" EXCELMATHLIB_API double add_two(double* x);
 extern "C" EXCELMATHLIB_API double power(double* x, double* y);
+extern "C" EXCELMATHLIB_API BSTR wordFunc();
