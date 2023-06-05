@@ -46,7 +46,10 @@ double WINAPI power(double* x, double* y) // raises x to the power of y.
 }
 */
 
-BSTR ConvertMBSToBSTR(const std::string& str) //found online for converting wstrings to BSTRs
+BSTR ConvertMBSToBSTR(const std::string& str) 
+//found online at 
+//https://stackoverflow.com/questions/6284524/bstr-to-stdstring-stdwstring-and-vice-versa 
+//for converting wstrings to BSTRs
 {
     int wslen = ::MultiByteToWideChar(CP_ACP, 0 /* no flags */,
         str.data(), str.length(),
