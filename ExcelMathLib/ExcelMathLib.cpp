@@ -1,13 +1,13 @@
 // MathLibrary.cpp : Defines the exported functions for the DLL.
 #include "pch.h" // use stdafx.h in Visual Studio 2017 and earlier
-#include "WTypes.h"
-#include <OleAuto.h>
+#include <OleAuto.h> //must be included for BSTR to cstring conversions
 #include <utility>
 #include <limits.h>
 #include "ExcelMathLib.h"
-#include <iostream>
-#include <fstream>
 #include <string>
+
+/* Following typedefs allow for ease of reading (I think). BSTR refer to 
+OLECHAR pointers specifically*/
 
 typedef WCHAR OLECHAR;
 typedef OLECHAR* BSTR;
@@ -40,7 +40,8 @@ double WINAPI power(double* x, double* y) // raises x to the power of y.
     return pow(*x, *y);
 }
 
-/*BSTR WINAPI wordFunc() //returns a VBA string of "I am a happy BSTR"
+/*
+BSTR WINAPI wordFunc() //returns a VBA string/BSTR
 {
     return SysAllocString(L"test");
 }
