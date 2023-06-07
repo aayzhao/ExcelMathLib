@@ -144,10 +144,11 @@ BSTR WINAPI reverse_word(BSTR excelW)
 }
 
 BSTR WINAPI is_apple(BSTR excelW) {
-    //std::string str = ConvertBSTRToMBS(excelW);
+    std::string str = ConvertBSTRToMBS(excelW);
     //std::string str = bstr_to_str(excelW);
-    std::wstring str = BSTR_to_wstring(excelW);
-    if (str == L"apple") {
+    //std::wstring str = BSTR_to_wstring(excelW);
+    //if (str == L"apple") {
+    if (str.compare("apple") == 0) {
         return ConvertMBSToBSTR("Yes");
     }
     return ConvertMBSToBSTR("No");
