@@ -1,4 +1,4 @@
-// MathLibrary.h - Contains declarations of math functions
+// ExcelMathLib.h - contains declarations of functions for the excel library
 #pragma once
 
 #ifdef EXCELMATHLIB_EXPORTS
@@ -13,3 +13,5 @@ extern "C" EXCELMATHLIB_API double divide_nums(double* x, double* y);
 extern "C" EXCELMATHLIB_API double add_two(double* x);
 extern "C" EXCELMATHLIB_API double power(double* x, double* y);
 extern "C" EXCELMATHLIB_API BSTR wordFunc();
+extern "C" EXCELMATHLIB_API BSTR reverse_word(BSTR excelW);
+extern "C" EXCELMATHLIB_API BSTR is_apple(BSTR excelW);
