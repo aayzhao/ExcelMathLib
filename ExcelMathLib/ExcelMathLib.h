@@ -15,3 +15,5 @@ extern "C" EXCELMATHLIB_API double power(double* x, double* y);
 extern "C" EXCELMATHLIB_API BSTR wordFunc();
 extern "C" EXCELMATHLIB_API BSTR reverse_word(BSTR excelW);
 extern "C" EXCELMATHLIB_API BSTR is_apple(BSTR excelW);
+extern "C" EXCELMATHLIB_API BSTR bstr_str_back(BSTR excelW);
+extern "C" EXCELMATHLIB_API BSTR greater_than_check(double* num, double* target);

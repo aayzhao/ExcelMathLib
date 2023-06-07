@@ -1,6 +1,7 @@
 // MathLibrary.cpp : Defines the exported functions for the DLL.
 #include "pch.h" // use stdafx.h in Visual Studio 2017 and earlier
 #include <OleAuto.h> //must be included for BSTR to cstring conversions
+//#include <iostream>
 #include <utility>
 #include <algorithm>
 #include <cstring>
@@ -15,6 +16,7 @@ these includes are probably important.
 #include <wtypes.h>
 #include <comutil.h> //must be included for the _bstr_t type to work
 #include <comdef.h>
+#include <Windows.h>
 
 /* Following typedefs allow for ease of reading (I think). BSTR refer to 
 OLECHAR pointers specifically*/
@@ -107,7 +109,7 @@ std::string ConvertBSTRToMBS(BSTR bstr)
 BSTR ConvertMBSToBSTR(const std::string& str) 
 //found online at 
 //https://stackoverflow.com/questions/6284524/bstr-to-stdstring-stdwstring-and-vice-versa 
-//for converting wstrings to BSTRs
+//for converting wstrings and strings to BSTRs
 {
     int wslen = ::MultiByteToWideChar(CP_ACP, 0 /* no flags */,
         str.data(), str.length(),
@@ -118,6 +120,37 @@ BSTR ConvertMBSToBSTR(const std::string& str)
         str.data(), str.length(),
         wsdata, wslen);
     return wsdata;
+}
+
+/*
+* ChatGPT generated codes for BSTR to string conversion.
+*/
+std::string bstr_to_string(BSTR bstrVariable)
+{
+    std::wstring wstrVariable(bstrVariable);
+    std::string strVariable(wstrVariable.begin(), wstrVariable.end());
+    return strVariable;
+}
+
+std::string BstrToString(BSTR bstr)
+{
+    std::string result;
+
+    int len = SysStringLen(bstr);
+    if (len > 0)
+    {
+        int size = WideCharToMultiByte(CP_UTF8, 0, bstr, len, nullptr, 0, nullptr, nullptr);
+        if (size > 0)
+        {
+            char* buffer = new char[size + 1];
+            WideCharToMultiByte(CP_UTF8, 0, bstr, len, buffer, size, nullptr, nullptr);
+            buffer[size] = '\0';
+            result = buffer;
+            delete[] buffer;
+        }
+    }
+
+    return result;
 }
 
 /*
@@ -143,13 +176,35 @@ BSTR WINAPI reverse_word(BSTR excelW)
     return ConvertMBSToBSTR(str);
 }
 
-BSTR WINAPI is_apple(BSTR excelW) {
-    std::string str = ConvertBSTRToMBS(excelW);
+BSTR WINAPI is_apple(BSTR excelW) 
+{
+    //std::string str = ConvertBSTRToMBS(excelW);
     //std::string str = bstr_to_str(excelW);
     //std::wstring str = BSTR_to_wstring(excelW);
+    //std::string str = bstr_to_string(excelW);
+    std::string str = BstrToString(excelW);
+    //std::cout << "Converted string: " << str << std::endl;
     //if (str == L"apple") {
     if (str.compare("apple") == 0) {
         return ConvertMBSToBSTR("Yes");
     }
     return ConvertMBSToBSTR("No");
+}
+
+BSTR WINAPI bstr_str_back(BSTR excelW)
+{
+    //std::string str = bstr_to_string(excelW);
+    std::string str = BstrToString(excelW);
+    return ConvertMBSToBSTR(str);
+}
+
+/*
+* Checks to see if num is greater than target. Returns "True" or "False" as BSTRs
+*/
+BSTR WINAPI greater_than_check(double* num, double* target)
+{
+    if (*num > *target) {
+        return ConvertMBSToBSTR("True");
+    }
+    return ConvertMBSToBSTR("False");
 }
