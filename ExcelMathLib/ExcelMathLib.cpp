@@ -164,6 +164,75 @@ std::wstring BSTR_to_wstring(BSTR bs)
     return ws;
 }
 
+/*
+* Converters provided by colleague
+*/
+
+/*
+* converts string to a BSTR in place
+*/
+void StringtoVBString(std::string CppString, BSTR* VBOutString) {
+
+    try {
+        SysFreeString(*VBOutString);
+
+        // The next four lines work... but give a memory error.
+        //char * tempChar = StringtoChar(&CppString);
+        //BSTR tempBSTR = ChartoBSTR(tempChar);
+        //*VBOutString = SysAllocString(tempBSTR);
+        //delete tempChar; tempChar = 0;
+
+        //This also works, and is simple!!!
+        //*VBOutString = CppString.c_str();
+        *VBOutString = SysAllocStringByteLen(CppString.c_str(), CppString.size());
+    }
+    catch (...) {
+        //Stuff
+        return;
+    }
+    return;
+}
+
+/*
+* helper function for BSTRtoString(BSTR inBSTR)
+*/
+int BSTRLen(BSTR String)
+{
+    int Len = 0;
+    int Pos = 0;
+    bool Finish = false;
+    if (String == NULL)
+        return(0);
+    while (!Finish)
+    {
+        unsigned int part = String[Pos];
+        if (part == 0)
+        {
+            return(Len);
+        }
+        else
+        {
+            Len++;
+        }
+        Pos++;
+    }
+    return(0);
+}
+
+/*
+* Converts a given BSTR into a string
+*/
+std::string BSTRtoString(BSTR inBSTR) {
+    std::string ConvertedString = "";
+    int Len = BSTRLen(inBSTR);
+
+    if (Len > 0) {
+        LPSTR buffer = (LPSTR)inBSTR;
+        ConvertedString = (std::string)buffer;
+    }
+    return ConvertedString;
+}
+
 BSTR WINAPI wordFunc() // returns a VBA string of "test"
 {
     return ConvertMBSToBSTR("test");
@@ -182,7 +251,8 @@ BSTR WINAPI is_apple(BSTR excelW)
     //std::string str = bstr_to_str(excelW);
     //std::wstring str = BSTR_to_wstring(excelW);
     //std::string str = bstr_to_string(excelW);
-    std::string str = BstrToString(excelW);
+    //std::string str = BstrToString(excelW);
+    std::string str = BSTRtoString(excelW);
     //std::cout << "Converted string: " << str << std::endl;
     //if (str == L"apple") {
     if (str.compare("apple") == 0) {
@@ -208,3 +278,14 @@ BSTR WINAPI greater_than_check(double* num, double* target)
     }
     return ConvertMBSToBSTR("False");
 }
+/*
+BSTR WINAPI intToString(int* arr, int* size) {
+    if (*size < 1) {
+        return ConvertMBSToBSTR("Array cannot be empty");
+    }
+    if (arr[0] == 10) {
+        return ConvertMBSToBSTR("A");
+    }
+    return ConvertMBSToBSTR("Not A");
+}
+*/
