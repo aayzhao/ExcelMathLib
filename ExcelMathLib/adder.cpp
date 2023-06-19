@@ -31,14 +31,12 @@ struct adder {
 	void* obj;
 };
 
-adder_t* WINAPI adder_create()
+void* WINAPI adder_create()
 {
-	adder_t* a;
+	void* a;
 	AddNum* obj;
-
-	a = (decltype(a))malloc(sizeof(*a));
 	obj = new AddNum();
-	a->obj = obj;
+	a = obj;
 
 	return a;
 }
@@ -79,7 +77,7 @@ double WINAPI adder_sum(adder_t* a, double x, double y)
 {
 	AddNum* obj;
 	if (a == NULL)
-		return 0.0;
+		return -1.0;
 	obj = static_cast<AddNum*>(a->obj);
-	return obj->sum(x, y);
+	obj->sum(x, y);
 }
