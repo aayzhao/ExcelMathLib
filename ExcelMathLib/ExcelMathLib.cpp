@@ -25,6 +25,11 @@ typedef WCHAR OLECHAR;
 typedef OLECHAR* BSTR;
 typedef BSTR* LPBSTR;
 
+double WINAPI add_byVal(double x, double y)
+{
+    return x + y;
+}
+
 double WINAPI get_square(double* x) //returns square of a given number
 {
     return *x * *x;

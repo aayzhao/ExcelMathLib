@@ -17,4 +17,5 @@ extern "C" EXCELMATHLIB_API BSTR reverse_word(BSTR excelW);
 extern "C" EXCELMATHLIB_API BSTR is_apple(BSTR excelW);
 extern "C" EXCELMATHLIB_API BSTR bstr_str_back(BSTR excelW);
 extern "C" EXCELMATHLIB_API BSTR greater_than_check(double* num, double* target);
+extern "C" EXCELMATHLIB_API double add_byVal(double x, double y);
 //extern "C" EXCELMATHLIB_API BSTR intToString(int* arr, int* size);

@@ -34,9 +34,8 @@ struct adder {
 void* WINAPI adder_create()
 {
 	void* a;
-	AddNum* obj;
-	obj = new AddNum();
-	a = obj;
+	AddNum obj;
+	a = &obj;
 
 	return a;
 }
@@ -70,13 +69,12 @@ void WINAPI adder_destroy(void* a)
 	if (a == NULL)
 		return;
 	delete (AddNum*)a;
-	free(a);
 }
 
 double WINAPI adder_sum(void* a, double x, double y)
 {
 	AddNum* obj = (AddNum*)a;
-	if (a == NULL)
+	if (obj == NULL)
 		return -1.0;
 	obj->sum(x, y);
 }
