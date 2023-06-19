@@ -65,19 +65,18 @@ adder_t* WINAPI adder_create_3(double start1, double start2)
 	return a;
 }
 
-void WINAPI adder_destroy(adder_t* a)
+void WINAPI adder_destroy(void* a)
 {
 	if (a == NULL)
 		return;
-	delete static_cast<AddNum*>(a->obj);
+	delete (AddNum*)a;
 	free(a);
 }
 
-double WINAPI adder_sum(adder_t* a, double x, double y)
+double WINAPI adder_sum(void* a, double x, double y)
 {
-	AddNum* obj;
+	AddNum* obj = (AddNum*)a;
 	if (a == NULL)
 		return -1.0;
-	obj = static_cast<AddNum*>(a->obj);
 	obj->sum(x, y);
 }
