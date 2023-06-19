@@ -1,4 +1,6 @@
+
 #include "pch.h"
+/*
 #include "AddNum.h"
 #include <iostream>
 
@@ -17,3 +19,4 @@ int main()
 
 	return 0;
 }
+*/

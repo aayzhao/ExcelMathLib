@@ -139,12 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="adder.h" />
     <ClInclude Include="AddNum.h" />
     <ClInclude Include="ExcelMathLib.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="adder.cpp" />
     <ClCompile Include="AddNum.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="ExcelMathLib.cpp" />
